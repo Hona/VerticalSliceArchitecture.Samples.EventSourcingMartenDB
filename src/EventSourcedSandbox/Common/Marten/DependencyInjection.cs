@@ -1,5 +1,6 @@
 using EventSourcedSandbox.Domain.Maps;
 using EventSourcedSandbox.Domain.Players;
+using EventSourcedSandbox.Domain.Records;
 using Marten;
 using Marten.Events.Projections;
 using Weasel.Core;
@@ -16,8 +17,11 @@ public static class DependencyInjection
             options.DatabaseSchemaName = "eventsourcedsandbox";
             options.AutoCreateSchemaObjects = AutoCreate.All;
 
-            options.Projections.Add<MapAggregate>(ProjectionLifecycle.Inline);
             options.Projections.Add<PlayerAggregateProjection>(ProjectionLifecycle.Inline);
+
+            options.Events.AddEventType<MapAddedEvent>();
+            options.Events.AddEventType<PlayerRegisteredEvent>();
+            options.Events.AddEventType<PlayerAchievedMapRecordEvent>();
         });
     }
 }

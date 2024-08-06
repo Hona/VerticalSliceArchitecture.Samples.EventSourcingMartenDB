@@ -10,7 +10,7 @@ internal sealed class ViewMapQuery(IQuerySession session)
 {
     public override void Configure()
     {
-        Get($"/maps/{nameof(ViewMapRequest.MapId)}");
+        Get($"/maps/{{{nameof(ViewMapRequest.MapId)}}}");
         AllowAnonymous();
     }
 
@@ -19,12 +19,14 @@ internal sealed class ViewMapQuery(IQuerySession session)
         CancellationToken cancellationToken
     )
     {
+        /*
         var response = await session.LoadAsync<MapAggregate>(request.MapId, cancellationToken);
+        */
 
-        /*var response = await session.Events.AggregateStreamAsync<MapAggregate>(
+        var response = await session.Events.AggregateStreamAsync<MapAggregate>(
             request.MapId,
             token: cancellationToken
-        );*/
+        );
 
         if (response is null)
         {

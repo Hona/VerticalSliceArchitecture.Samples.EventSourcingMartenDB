@@ -6,11 +6,11 @@ namespace EventSourcedSandbox.Features.Players;
 internal sealed record ViewPlayerRequest(Guid PlayerId);
 
 internal sealed class ViewPlayerQuery(IQuerySession session)
-    : Endpoint<ViewPlayerRequest, Results<Ok<PlayerAggregate>, NotFound>>
+    : Endpoint<ViewPlayerRequest, Results<Ok<PlayerProjection>, NotFound>>
 {
     public override void Configure()
     {
-        Get($"/players/{nameof(ViewPlayerRequest.PlayerId)}");
+        Get($"/players/{{{nameof(ViewPlayerRequest.PlayerId)}}}");
         AllowAnonymous();
     }
 
@@ -19,7 +19,7 @@ internal sealed class ViewPlayerQuery(IQuerySession session)
         CancellationToken cancellationToken
     )
     {
-        var response = await session.LoadAsync<PlayerAggregate>(
+        var response = await session.LoadAsync<PlayerProjection>(
             request.PlayerId,
             cancellationToken
         );
