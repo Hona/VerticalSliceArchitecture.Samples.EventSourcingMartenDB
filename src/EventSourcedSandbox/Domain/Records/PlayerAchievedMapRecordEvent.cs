@@ -1,8 +1,3 @@
 namespace EventSourcedSandbox.Domain.Records;
 
-public record PlayerAchievedMapRecordEvent(
-    DateTimeOffset Timestamp,
-    Guid MapId,
-    Guid PlayerId,
-    TimeSpan Duration
-);
+public record PlayerAchievedMapRecordEvent(Guid MapId, Guid PlayerId, TimeSpan Duration);

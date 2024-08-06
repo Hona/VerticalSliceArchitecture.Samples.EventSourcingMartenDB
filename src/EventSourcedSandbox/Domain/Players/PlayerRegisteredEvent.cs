@@ -1,3 +1,3 @@
 namespace EventSourcedSandbox.Domain.Players;
 
-public record PlayerRegisteredEvent(DateTimeOffset Timestamp, Guid PlayerId, string PlayerName);
+public record PlayerRegisteredEvent(Guid PlayerId, string PlayerName);

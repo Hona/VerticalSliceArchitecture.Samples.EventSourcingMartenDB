@@ -24,9 +24,7 @@ public static class RecordService
             {
                 // Replace with the new record if it's faster or if no existing record
                 group.RemoveAll(r => r.PlayerId == @event.PlayerId && r.MapId == @event.MapId);
-                group.Add(
-                    new Record(@event.PlayerId, @event.MapId, @event.Timestamp, @event.Duration)
-                );
+                group.Add(new Record(@event.PlayerId, @event.MapId, @event.Duration));
             }
         }
         else
@@ -34,7 +32,7 @@ public static class RecordService
             // Add a new group with the new record
             recordsByPlayerAndMap[key] = new List<Record>
             {
-                new Record(@event.PlayerId, @event.MapId, @event.Timestamp, @event.Duration)
+                new Record(@event.PlayerId, @event.MapId, @event.Duration)
             };
         }
 

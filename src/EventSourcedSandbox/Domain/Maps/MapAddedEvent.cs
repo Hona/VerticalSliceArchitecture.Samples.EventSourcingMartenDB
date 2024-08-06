@@ -1,3 +1,3 @@
 namespace EventSourcedSandbox.Domain.Maps;
 
-public record MapAddedEvent(DateTimeOffset Timestamp, Guid MapId, string MapName);
+public record MapAddedEvent(Guid MapId, string MapName);

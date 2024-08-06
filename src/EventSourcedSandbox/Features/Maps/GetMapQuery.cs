@@ -19,10 +19,6 @@ internal sealed class ViewMapQuery(IQuerySession session)
         CancellationToken cancellationToken
     )
     {
-        /*
-        var response = await session.LoadAsync<MapAggregate>(request.MapId, cancellationToken);
-        */
-
         var response = await session.Events.AggregateStreamAsync<MapAggregate>(
             request.MapId,
             token: cancellationToken

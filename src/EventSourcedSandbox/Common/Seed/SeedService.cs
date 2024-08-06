@@ -24,16 +24,8 @@ public class SeedService
         var map1 = Guid.NewGuid();
         var map2 = Guid.NewGuid();
 
-        var mapRegistered1 = new MapAddedEvent(
-            rootTimeStamp.Subtract(TimeSpan.FromDays(8)),
-            map1,
-            "jump_beef"
-        );
-        var mapRegistered2 = new MapAddedEvent(
-            rootTimeStamp.Subtract(TimeSpan.FromDays(8)),
-            map2,
-            "jump_ice"
-        );
+        var mapRegistered1 = new MapAddedEvent(map1, "jump_beef");
+        var mapRegistered2 = new MapAddedEvent(map2, "jump_ice");
 
         session.Events.StartStream(map1, mapRegistered1);
         session.Events.StartStream(map2, mapRegistered2);
@@ -49,31 +41,11 @@ public class SeedService
         var player4 = Guid.NewGuid();
         var player5 = Guid.NewGuid();
 
-        var playerRegistered1 = new PlayerRegisteredEvent(
-            rootTimeStamp.Subtract(TimeSpan.FromDays(10)),
-            player1,
-            "Alice"
-        );
-        var playerRegistered2 = new PlayerRegisteredEvent(
-            rootTimeStamp.Subtract(TimeSpan.FromDays(11)),
-            player2,
-            "Bob"
-        );
-        var playerRegistered3 = new PlayerRegisteredEvent(
-            rootTimeStamp.Subtract(TimeSpan.FromDays(12)),
-            player3,
-            "Charlie"
-        );
-        var playerRegistered4 = new PlayerRegisteredEvent(
-            rootTimeStamp.Subtract(TimeSpan.FromDays(13)),
-            player4,
-            "David"
-        );
-        var playerRegistered5 = new PlayerRegisteredEvent(
-            rootTimeStamp.Subtract(TimeSpan.FromDays(14)),
-            player5,
-            "Eve"
-        );
+        var playerRegistered1 = new PlayerRegisteredEvent(player1, "Alice");
+        var playerRegistered2 = new PlayerRegisteredEvent(player2, "Bob");
+        var playerRegistered3 = new PlayerRegisteredEvent(player3, "Charlie");
+        var playerRegistered4 = new PlayerRegisteredEvent(player4, "David");
+        var playerRegistered5 = new PlayerRegisteredEvent(player5, "Eve");
 
         session.Events.StartStream(player1, playerRegistered1);
         session.Events.StartStream(player2, playerRegistered2);
@@ -86,66 +58,16 @@ public class SeedService
 
         // Register some records
 
-        var record1 = new PlayerAchievedMapRecordEvent(
-            rootTimeStamp.Subtract(TimeSpan.FromDays(7)),
-            map1,
-            player1,
-            TimeSpan.FromSeconds(1000)
-        );
-        var record2 = new PlayerAchievedMapRecordEvent(
-            rootTimeStamp.Subtract(TimeSpan.FromDays(7)),
-            map1,
-            player2,
-            TimeSpan.FromSeconds(900)
-        );
-        var record3 = new PlayerAchievedMapRecordEvent(
-            rootTimeStamp.Subtract(TimeSpan.FromDays(6)),
-            map1,
-            player3,
-            TimeSpan.FromSeconds(800)
-        );
-        var record4 = new PlayerAchievedMapRecordEvent(
-            rootTimeStamp.Subtract(TimeSpan.FromDays(6)),
-            map1,
-            player4,
-            TimeSpan.FromSeconds(700)
-        );
-        var record5 = new PlayerAchievedMapRecordEvent(
-            rootTimeStamp.Subtract(TimeSpan.FromDays(5)),
-            map1,
-            player5,
-            TimeSpan.FromSeconds(600)
-        );
-        var record6 = new PlayerAchievedMapRecordEvent(
-            rootTimeStamp.Subtract(TimeSpan.FromDays(5)),
-            map2,
-            player1,
-            TimeSpan.FromSeconds(500)
-        );
-        var record7 = new PlayerAchievedMapRecordEvent(
-            rootTimeStamp.Subtract(TimeSpan.FromDays(4)),
-            map2,
-            player2,
-            TimeSpan.FromSeconds(400)
-        );
-        var record8 = new PlayerAchievedMapRecordEvent(
-            rootTimeStamp.Subtract(TimeSpan.FromDays(3)),
-            map2,
-            player3,
-            TimeSpan.FromSeconds(300)
-        );
-        var record9 = new PlayerAchievedMapRecordEvent(
-            rootTimeStamp.Subtract(TimeSpan.FromDays(2)),
-            map2,
-            player4,
-            TimeSpan.FromSeconds(200)
-        );
-        var record10 = new PlayerAchievedMapRecordEvent(
-            rootTimeStamp.Subtract(TimeSpan.FromDays(1)),
-            map2,
-            player5,
-            TimeSpan.FromSeconds(100)
-        );
+        var record1 = new PlayerAchievedMapRecordEvent(map1, player1, TimeSpan.FromSeconds(1000));
+        var record2 = new PlayerAchievedMapRecordEvent(map1, player2, TimeSpan.FromSeconds(900));
+        var record3 = new PlayerAchievedMapRecordEvent(map1, player3, TimeSpan.FromSeconds(800));
+        var record4 = new PlayerAchievedMapRecordEvent(map1, player4, TimeSpan.FromSeconds(700));
+        var record5 = new PlayerAchievedMapRecordEvent(map1, player5, TimeSpan.FromSeconds(600));
+        var record6 = new PlayerAchievedMapRecordEvent(map2, player1, TimeSpan.FromSeconds(500));
+        var record7 = new PlayerAchievedMapRecordEvent(map2, player2, TimeSpan.FromSeconds(400));
+        var record8 = new PlayerAchievedMapRecordEvent(map2, player3, TimeSpan.FromSeconds(300));
+        var record9 = new PlayerAchievedMapRecordEvent(map2, player4, TimeSpan.FromSeconds(200));
+        var record10 = new PlayerAchievedMapRecordEvent(map2, player5, TimeSpan.FromSeconds(100));
 
         session.Events.Append(map1, record1);
         session.Events.Append(map1, record2);

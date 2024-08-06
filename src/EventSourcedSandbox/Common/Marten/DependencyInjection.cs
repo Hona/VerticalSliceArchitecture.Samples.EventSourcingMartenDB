@@ -17,7 +17,7 @@ public static class DependencyInjection
             options.DatabaseSchemaName = "eventsourcedsandbox";
             options.AutoCreateSchemaObjects = AutoCreate.All;
 
-            options.Projections.Add<PlayerAggregateProjection>(ProjectionLifecycle.Inline);
+            options.Projections.Add<PlayerProjector>(ProjectionLifecycle.Inline);
 
             options.Events.AddEventType<MapAddedEvent>();
             options.Events.AddEventType<PlayerRegisteredEvent>();
