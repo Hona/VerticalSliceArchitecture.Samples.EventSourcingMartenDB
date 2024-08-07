@@ -23,4 +23,3 @@ public class PlayerProjector : MultiStreamProjection<PlayerProjection, Guid>
         view.Records = RecordService.TryInsertOrUpdateRecord(view.Records, @event);
     }
 }
-

@@ -17,8 +17,6 @@ public class SeedService
 
         await using var session = store.LightweightSession();
 
-        var rootTimeStamp = DateTimeOffset.Now;
-
         // Add some maps
 
         var map1 = Guid.NewGuid();
@@ -27,8 +25,18 @@ public class SeedService
         var mapRegistered1 = new MapAddedEvent(map1, "jump_beef");
         var mapRegistered2 = new MapAddedEvent(map2, "jump_ice");
 
-        session.Events.StartStream(map1, mapRegistered1);
-        session.Events.StartStream(map2, mapRegistered2);
+        session
+            .Events.StartStream(map1, mapRegistered1)
+            .WithBackfill(
+                created: DateTimeOffset.FromUnixTimeSeconds(521529),
+                timestamp: DateTimeOffset.FromUnixTimeSeconds(521529)
+            );
+        session
+            .Events.StartStream(map2, mapRegistered2)
+            .WithBackfill(
+                created: DateTimeOffset.FromUnixTimeSeconds(546329),
+                timestamp: DateTimeOffset.FromUnixTimeSeconds(546329)
+            );
 
         // Save the pending changes to db
         await session.SaveChangesAsync();
@@ -47,11 +55,36 @@ public class SeedService
         var playerRegistered4 = new PlayerRegisteredEvent(player4, "David");
         var playerRegistered5 = new PlayerRegisteredEvent(player5, "Eve");
 
-        session.Events.StartStream(player1, playerRegistered1);
-        session.Events.StartStream(player2, playerRegistered2);
-        session.Events.StartStream(player3, playerRegistered3);
-        session.Events.StartStream(player4, playerRegistered4);
-        session.Events.StartStream(player5, playerRegistered5);
+        session
+            .Events.StartStream(player1, playerRegistered1)
+            .WithBackfill(
+                created: DateTimeOffset.FromUnixTimeSeconds(556329),
+                timestamp: DateTimeOffset.FromUnixTimeSeconds(556329)
+            );
+        session
+            .Events.StartStream(player2, playerRegistered2)
+            .WithBackfill(
+                created: DateTimeOffset.FromUnixTimeSeconds(566329),
+                timestamp: DateTimeOffset.FromUnixTimeSeconds(566329)
+            );
+        session
+            .Events.StartStream(player3, playerRegistered3)
+            .WithBackfill(
+                created: DateTimeOffset.FromUnixTimeSeconds(576329),
+                timestamp: DateTimeOffset.FromUnixTimeSeconds(576329)
+            );
+        session
+            .Events.StartStream(player4, playerRegistered4)
+            .WithBackfill(
+                created: DateTimeOffset.FromUnixTimeSeconds(586329),
+                timestamp: DateTimeOffset.FromUnixTimeSeconds(586329)
+            );
+        session
+            .Events.StartStream(player5, playerRegistered5)
+            .WithBackfill(
+                created: DateTimeOffset.FromUnixTimeSeconds(596329),
+                timestamp: DateTimeOffset.FromUnixTimeSeconds(596329)
+            );
 
         // Save the pending changes to db
         await session.SaveChangesAsync();
@@ -69,16 +102,16 @@ public class SeedService
         var record9 = new PlayerAchievedMapRecordEvent(map2, player4, TimeSpan.FromSeconds(200));
         var record10 = new PlayerAchievedMapRecordEvent(map2, player5, TimeSpan.FromSeconds(100));
 
-        session.Events.Append(map1, record1);
-        session.Events.Append(map1, record2);
-        session.Events.Append(map1, record3);
-        session.Events.Append(map1, record4);
-        session.Events.Append(map1, record5);
-        session.Events.Append(map2, record6);
-        session.Events.Append(map2, record7);
-        session.Events.Append(map2, record8);
-        session.Events.Append(map2, record9);
-        session.Events.Append(map2, record10);
+        session.Events.Append(map1, DateTimeOffset.FromUnixTimeSeconds(616329), record1);
+        session.Events.Append(map1, DateTimeOffset.FromUnixTimeSeconds(626329), record2);
+        session.Events.Append(map1, DateTimeOffset.FromUnixTimeSeconds(636329), record3);
+        session.Events.Append(map1, DateTimeOffset.FromUnixTimeSeconds(646329), record4);
+        session.Events.Append(map1, DateTimeOffset.FromUnixTimeSeconds(656329), record5);
+        session.Events.Append(map2, DateTimeOffset.FromUnixTimeSeconds(666329), record6);
+        session.Events.Append(map2, DateTimeOffset.FromUnixTimeSeconds(676329), record7);
+        session.Events.Append(map2, DateTimeOffset.FromUnixTimeSeconds(686329), record8);
+        session.Events.Append(map2, DateTimeOffset.FromUnixTimeSeconds(696329), record9);
+        session.Events.Append(map2, DateTimeOffset.FromUnixTimeSeconds(706329), record10);
 
         // Save the pending changes to db
         await session.SaveChangesAsync();
